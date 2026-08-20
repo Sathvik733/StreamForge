@@ -25,12 +25,16 @@ CURRENCIES = {
 
 
 class EventGenerator:
-    def generate_event(self) -> OrderEvent:
+    def generate_event(
+        self,
+        order_id: str | None = None,
+    ) -> OrderEvent:
+
         country = random.choice(COUNTRIES)
 
         return OrderEvent(
             event_type=random.choice(list(EventType)),
-            order_id=f"ORD-{random.randint(10000, 99999)}",
+            order_id=order_id or f"ORD-{random.randint(10000, 99999)}",
             customer_id=f"CUST-{random.randint(1000, 9999)}",
             product_id=f"PROD-{random.randint(100, 999)}",
             amount=round(random.uniform(10.0, 500.0), 2),

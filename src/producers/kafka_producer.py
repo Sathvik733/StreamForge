@@ -67,10 +67,17 @@ if __name__ == "__main__":
     producer = KafkaEventProducer()
     generator = EventGenerator()
 
-    for _ in range(10):
-        event = generator.generate_event()
+    test_order_id = "ORD-STREAMFORGE-001"
 
-        print(f"📦 Generated event: {event}")
+    for _ in range(10):
+        event = generator.generate_event(
+            order_id=test_order_id
+        )
+
+        print(
+            f"📦 Generated event | "
+            f"order_id={event.order_id}"
+        )
 
         producer.publish(
             topic="events.raw",
